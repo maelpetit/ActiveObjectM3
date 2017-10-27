@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 /**
  * Service
  */
-public interface AsyncGenerator extends Subject{
+public interface AsyncGenerator {
     Future<Integer> getValue();
-
 }

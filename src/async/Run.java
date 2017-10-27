@@ -14,10 +14,19 @@ public class Run {
     public static void main(String[] args){
         Generator generator = new GeneratorImpl();
         ScheduledExecutorService service = new ScheduledThreadPoolExecutor(15);
-        Channel channel = new Channel(generator, service);
-        Display display = new Display(channel);
-        service.scheduleAtFixedRate(()-> generator.generate(), 1000, 1000, TimeUnit.MILLISECONDS);
-
+        Channel channel1 = new Channel(generator, service, 100);
+        Channel channel2 = new Channel(generator, service, 200);
+        Channel channel3 = new Channel(generator, service, 300);
+        Channel channel4 = new Channel(generator, service, 400);
+        ((GeneratorImpl) generator).addAsyncObserver(channel1);
+        ((GeneratorImpl) generator).addAsyncObserver(channel2);
+        ((GeneratorImpl) generator).addAsyncObserver(channel3);
+        ((GeneratorImpl) generator).addAsyncObserver(channel4);
+        channel1.attach(new Display("1"));
+        channel2.attach(new Display("2"));
+        channel3.attach(new Display("3"));
+        channel4.attach(new Display("4"));
+        service.scheduleAtFixedRate(()-> generator.generate(), 0, 100, TimeUnit.MILLISECONDS);
         /*for(int j = 0; j < 10000; j++) {
             int value = j;
             int startingValue = value;

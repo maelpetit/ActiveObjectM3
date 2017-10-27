@@ -1,8 +1,6 @@
 package async.impl;
 
-import async.interfaces.Generator;
-import async.interfaces.GeneratorObserver;
-import async.interfaces.Observer;
+import async.interfaces.*;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -10,28 +8,23 @@ import java.util.concurrent.Future;
 /**
  * Concrete observer
  */
-public class Display implements GeneratorObserver {
+public class Display implements Observer<AsyncGenerator> {
 
-    private Channel channel;
-    private Future<Integer> future;
+    private String name;
 
-    public Display(Channel channel){
-        this.channel = channel;
-        this.channel.attach(this);
+    public Display(String name){
+        this.name = name;
     }
 
-
-
     @Override
-    public void update(Generator subject) {
-        future = channel.getValue();
-
+    public void update(AsyncGenerator asyncGenerator) {
         try {
-            System.out.println(future.get());
+            System.out.println(name + " " + asyncGenerator.getValue().get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
     }
+
 }

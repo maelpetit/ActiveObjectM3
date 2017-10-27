@@ -17,9 +17,7 @@ public class GetValue implements Callable<Integer>{
 
     @Override
     public Integer call() throws Exception {
-        int i = generator.getValue();
-        //System.out.println("GetValue.call " + i);
-        return i;
+        return generator.getValue();
     }
 
 }
