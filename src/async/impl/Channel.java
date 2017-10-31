@@ -29,7 +29,7 @@ public class Channel implements AsyncGenerator, AsyncObserver<Generator>, Subjec
                 observer.update(this);
             }
             return null;
-        }, 100, TimeUnit.MILLISECONDS);
+        }, delay, TimeUnit.MILLISECONDS);
     }
 
     @Override

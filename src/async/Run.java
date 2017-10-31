@@ -1,9 +1,11 @@
 package async;
 
+import async.impl.strategies.Atomic;
 import async.impl.Channel;
 import async.impl.Display;
 import async.impl.GeneratorImpl;
 import async.interfaces.Generator;
+import async.interfaces.Strategy;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -12,33 +14,16 @@ import java.util.concurrent.TimeUnit;
 public class Run {
 
     public static void main(String[] args){
-        Generator generator = new GeneratorImpl();
+        Strategy atomicDistribution = new Atomic();
+        Generator generator = new GeneratorImpl(atomicDistribution);
         ScheduledExecutorService service = new ScheduledThreadPoolExecutor(15);
         Channel channel1 = new Channel(generator, service, 100);
-        Channel channel2 = new Channel(generator, service, 200);
-        Channel channel3 = new Channel(generator, service, 300);
-        Channel channel4 = new Channel(generator, service, 400);
-        ((GeneratorImpl) generator).addAsyncObserver(channel1);
-        ((GeneratorImpl) generator).addAsyncObserver(channel2);
-        ((GeneratorImpl) generator).addAsyncObserver(channel3);
-        ((GeneratorImpl) generator).addAsyncObserver(channel4);
+        Channel channel2 = new Channel(generator, service, 1000);
         channel1.attach(new Display("1"));
         channel2.attach(new Display("2"));
-        channel3.attach(new Display("3"));
-        channel4.attach(new Display("4"));
+        ((GeneratorImpl) generator).addAsyncObserver(channel1);
+        ((GeneratorImpl) generator).addAsyncObserver(channel2);
+
         service.scheduleAtFixedRate(()-> generator.generate(), 0, 100, TimeUnit.MILLISECONDS);
-        /*for(int j = 0; j < 10000; j++) {
-            int value = j;
-            int startingValue = value;
-            for (int i = 0; i < 1e6; i++) {
-                //System.out.println((Math.log(value)));
-                value = (int) ((Math.log(value) * 1e8) % 10000);
-                //System.out.println(value);
-                if (value == startingValue) {
-                    System.out.println("Loop after " + (i + 1) + " iterations for " + startingValue);
-                    break;
-                }
-            }
-        }*/
     }
 }
