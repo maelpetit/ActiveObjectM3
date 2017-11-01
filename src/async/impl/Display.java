@@ -8,7 +8,7 @@ import java.util.concurrent.Future;
 /**
  * Concrete observer
  */
-public class Display implements Observer<AsyncGenerator> {
+public class Display  implements Observer<AsyncGenerator> {
 
     private String name;
 

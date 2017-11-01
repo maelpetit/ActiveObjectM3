@@ -19,8 +19,10 @@ public class Run {
         ScheduledExecutorService service = new ScheduledThreadPoolExecutor(15);
         Channel channel1 = new Channel(generator, service, 100);
         Channel channel2 = new Channel(generator, service, 1000);
-        channel1.attach(new Display("1"));
-        channel2.attach(new Display("2"));
+        Display display1 = new Display("1");
+        Display display2 = new Display("2");
+        channel1.attach(display1);
+        channel2.attach(display2);
         ((GeneratorImpl) generator).addAsyncObserver(channel1);
         ((GeneratorImpl) generator).addAsyncObserver(channel2);
 
