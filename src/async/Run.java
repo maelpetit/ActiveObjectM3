@@ -4,6 +4,7 @@ import async.impl.strategies.Atomic;
 import async.impl.Channel;
 import async.impl.Display;
 import async.impl.GeneratorImpl;
+import async.impl.strategies.Sequential;
 import async.interfaces.Generator;
 import async.interfaces.Strategy;
 
@@ -14,8 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class Run {
 
     public static void main(String[] args){
-        Strategy atomicDistribution = new Atomic();
-        Generator generator = new GeneratorImpl(atomicDistribution);
+        //Strategy atomicDistribution = new Atomic();
+        Strategy seqDistribution = new Sequential();
+        Generator generator = new GeneratorImpl(seqDistribution);
         ScheduledExecutorService service = new ScheduledThreadPoolExecutor(15);
         Channel channel1 = new Channel(generator, service, 100);
         Channel channel2 = new Channel(generator, service, 1000);

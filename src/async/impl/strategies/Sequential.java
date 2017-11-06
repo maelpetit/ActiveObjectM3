@@ -1,7 +1,10 @@
 package async.impl.strategies;
 
 import async.impl.GeneratorImpl;
+import async.interfaces.AsyncObserver;
 import async.interfaces.Strategy;
+
+import java.util.concurrent.ExecutionException;
 
 public class Sequential implements Strategy{
 
@@ -14,6 +17,8 @@ public class Sequential implements Strategy{
 
     @Override
     public void execute() {
-
+        for(AsyncObserver asyncObserver : generator.getAsyncObservers()){
+            asyncObserver.update(generator);
+        }
     }
 }
