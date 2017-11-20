@@ -16,12 +16,23 @@ public class Channel implements AsyncGenerator, AsyncObserver<Generator>, Subjec
     private Generator generator;
     private int delay;
 
+    /**
+     * Constructor
+     * @param generator
+     * @param scheduledExecutorService
+     * @param delay
+     */
     public Channel(Generator generator, ScheduledExecutorService scheduledExecutorService, int delay){
         this.scheduledExecutorService = scheduledExecutorService;
         this.generator = generator;
         this.delay = delay;
     }
 
+    /**
+     * Update the generator
+     * @param subject
+     * @return ???
+     */
     @Override
     public Future<Void> update(Generator subject) {
         return scheduledExecutorService.schedule(() -> {
@@ -32,16 +43,28 @@ public class Channel implements AsyncGenerator, AsyncObserver<Generator>, Subjec
         }, delay, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * return a Value of generator
+     * @return
+     */
     @Override
     public Future<Integer> getValue() {
         return scheduledExecutorService.schedule(new GetValue(generator), delay, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * attach an observer
+     * @param observer
+     */
     @Override
     public void attach(Observer observer) {
         this.observer = observer;
     }
 
+    /**
+     * delete an observer
+     * @param observer
+     */
     @Override
     public void detach(Observer observer) {
         if(observer == this.observer) {

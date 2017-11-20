@@ -11,11 +11,18 @@ public class Atomic implements Strategy{
 
     private GeneratorImpl generator;
 
+    /**
+     * configure generator
+     * @param generator
+     */
     @Override
     public void configure(GeneratorImpl generator) {
         this.generator = generator;
     }
 
+    /**
+     * function execute
+     */
     @Override
     public void execute() {
         for(AsyncObserver asyncObserver : generator.getAsyncObservers()){

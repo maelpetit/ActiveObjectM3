@@ -12,8 +12,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Run
+ */
 public class Run {
 
+    /**
+     * function main
+     * @param args
+     */
     public static void main(String[] args){
         //Strategy atomicDistribution = new Atomic();
         Strategy seqDistribution = new Sequential();

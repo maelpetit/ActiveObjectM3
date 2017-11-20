@@ -4,7 +4,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /**
- * Service
+ * AsyncGenerator interface
+ * Servant
  */
 public interface AsyncGenerator {
     Future<Integer> getValue();

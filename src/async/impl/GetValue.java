@@ -11,10 +11,19 @@ public class GetValue implements Callable<Integer>{
 
     private Generator generator;
 
+    /**
+     * get Value
+     * @param generator
+     */
     public GetValue(Generator generator){
         this.generator = generator;
     }
 
+    /**
+     * call getValue
+     * @return
+     * @throws Exception
+     */
     @Override
     public Integer call() throws Exception {
         return generator.getValue();

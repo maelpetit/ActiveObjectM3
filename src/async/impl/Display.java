@@ -12,10 +12,18 @@ public class Display  implements Observer<AsyncGenerator> {
 
     private String name;
 
+    /**
+     * Constructor
+     * @param name
+     */
     public Display(String name){
         this.name = name;
     }
 
+    /**
+     * update asyncGenerator
+     * @param asyncGenerator
+     */
     @Override
     public void update(AsyncGenerator asyncGenerator) {
         try {

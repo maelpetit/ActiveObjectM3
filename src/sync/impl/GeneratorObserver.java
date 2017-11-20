@@ -8,6 +8,10 @@ import sync.interfaces.Observer;
  */
 public class GeneratorObserver implements Observer<Generator> {
 
+    /**
+     * update observer
+     * @param subject
+     */
     @Override
     public void update(Generator subject) {
         System.out.println(subject.getValue());
