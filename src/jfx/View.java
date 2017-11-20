@@ -7,11 +7,13 @@ import async.impl.strategies.Sequential;
 import async.interfaces.Generator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * View
+ */
 public class View {
 
     ScheduledExecutorService service;

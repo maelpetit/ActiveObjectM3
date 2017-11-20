@@ -31,7 +31,7 @@ public class Channel implements AsyncGenerator, AsyncObserver<Generator>, Subjec
     /**
      * Update the generator
      * @param subject
-     * @return ???
+     * @return Future<Void>
      */
     @Override
     public Future<Void> update(Generator subject) {
@@ -45,7 +45,7 @@ public class Channel implements AsyncGenerator, AsyncObserver<Generator>, Subjec
 
     /**
      * return a Value of generator
-     * @return
+     * @return Future<Integer>
      */
     @Override
     public Future<Integer> getValue() {

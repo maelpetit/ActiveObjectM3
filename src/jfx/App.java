@@ -6,8 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * App
+ */
 public class App extends Application{
 
+    /**
+     * Override function start
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
@@ -17,6 +25,10 @@ public class App extends Application{
     }
 
 
+    /**
+     * function main
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
