@@ -16,6 +16,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * View
+ */
 public class View {
 
     ScheduledExecutorService service;
