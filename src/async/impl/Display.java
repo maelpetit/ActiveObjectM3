@@ -1,6 +1,10 @@
 package async.impl;
 
 import async.interfaces.*;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -10,14 +14,14 @@ import java.util.concurrent.Future;
  */
 public class Display  implements Observer<AsyncGenerator> {
 
-    private String name;
+    private Label label;
 
     /**
      * Constructor
      * @param name
      */
-    public Display(String name){
-        this.name = name;
+    public Display(Label label){
+        this.label = label;
     }
 
     /**
@@ -27,7 +31,9 @@ public class Display  implements Observer<AsyncGenerator> {
     @Override
     public void update(AsyncGenerator asyncGenerator) {
         try {
-            System.out.println(name + " " + asyncGenerator.getValue().get());
+            Integer value = asyncGenerator.getValue().get();
+            System.out.println(value);
+            Platform.runLater(() -> label.setText(value + ""));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

@@ -22,9 +22,8 @@ public class Run {
      * @param args
      */
     public static void main(String[] args){
-        //Strategy atomicDistribution = new Atomic();
-        Strategy seqDistribution = new Sequential();
-        Generator generator = new GeneratorImpl(seqDistribution);
+        /*Strategy distribution = new Sequential();
+        Generator generator = new GeneratorImpl(distribution);
         ScheduledExecutorService service = new ScheduledThreadPoolExecutor(15);
         Channel channel1 = new Channel(generator, service, 100);
         Channel channel2 = new Channel(generator, service, 200);
@@ -43,6 +42,6 @@ public class Run {
         ((GeneratorImpl) generator).addAsyncObserver(channel3);
         ((GeneratorImpl) generator).addAsyncObserver(channel4);
 
-        service.scheduleAtFixedRate(()-> generator.generate(), 0, 1000, TimeUnit.MILLISECONDS);
+        service.scheduleAtFixedRate(()-> generator.generate(), 0, 1000, TimeUnit.MILLISECONDS);*/
     }
 }
