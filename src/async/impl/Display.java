@@ -18,7 +18,7 @@ public class Display  implements Observer<AsyncGenerator> {
 
     /**
      * Constructor
-     * @param name
+     * @param label
      */
     public Display(Label label){
         this.label = label;

@@ -50,5 +50,8 @@ public class GeneratorImpl implements Generator , Subject<AsyncObserver>{
 
     }
 
+    public void reset(){
+        value = 0;
+    }
 
 }

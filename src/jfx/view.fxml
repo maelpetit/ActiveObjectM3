@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jfx.View">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,15 +24,15 @@
          <children>
             <HBox fillHeight="false" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#start" text="Start" />
-                  <Button mnemonicParsing="false" text="Pause" />
-                  <Button mnemonicParsing="false" onMouseClicked="#stop" text="Stop" />
-                  <RadioButton mnemonicParsing="false" text="Atomic">
+                  <Button fx:id="startButton" mnemonicParsing="false" onMouseClicked="#start" text="Start" />
+                  <Button fx:id="pauseButton" mnemonicParsing="false" onMouseClicked="#pause" text="Pause" />
+                  <Button fx:id="stopButton" mnemonicParsing="false" onMouseClicked="#stop" text="Stop" />
+                  <RadioButton fx:id="atomButton" mnemonicParsing="false" onAction="#changeStratToAtom" text="Atomic">
                      <HBox.margin>
                         <Insets top="3.0" />
                      </HBox.margin>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Sequential">
+                  <RadioButton fx:id="seqButton" mnemonicParsing="false" onAction="#changeStratToSeq" text="Sequential">
                      <HBox.margin>
                         <Insets top="3.0" />
                      </HBox.margin>

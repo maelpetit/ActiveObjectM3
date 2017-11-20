@@ -3,11 +3,15 @@ package jfx;
 import async.impl.Channel;
 import async.impl.Display;
 import async.impl.GeneratorImpl;
+import async.impl.strategies.Atomic;
 import async.impl.strategies.Sequential;
 import async.interfaces.Generator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -24,11 +28,29 @@ public class View {
     private Label labelDisplay3;
     @FXML
     private Label labelDisplay4;
+    @FXML
+    private RadioButton seqButton;
+    @FXML
+    private RadioButton atomButton;
+    @FXML
+    private Button startButton;
+    @FXML
+    private Button stopButton;
+    @FXML
+    private Button pauseButton;
+
+
+    private Atomic atomic = new Atomic();
+    private Sequential sequential = new Sequential();
 
     @FXML
     private void initialize(){
-        generator = new GeneratorImpl(new Sequential());
-        service = new ScheduledThreadPoolExecutor(15);
+        generator = new GeneratorImpl(sequential);
+        seqButton.setSelected(true);
+        atomButton.setSelected(false);
+        stopButton.setDisable(true);
+        pauseButton.setDisable(true);
+        service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
         Channel channel1 = new Channel(generator, service, 100);
         Channel channel2 = new Channel(generator, service, 200);
         Channel channel3 = new Channel(generator, service, 300);
@@ -49,13 +71,45 @@ public class View {
 
     @FXML
     private void start(){
-        service.scheduleAtFixedRate(()-> generator.generate(), 0, 1000, TimeUnit.MILLISECONDS);
+        service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
+        service.scheduleAtFixedRate(() -> generator.generate(), 0, 100, TimeUnit.MILLISECONDS);
+        startButton.setDisable(true);
+        stopButton.setDisable(false);
+        pauseButton.setDisable(false);
     }
 
     @FXML
     private void stop(){
         if(!service.isShutdown()) {
             service.shutdown();
+            ((GeneratorImpl) generator).reset();
+            startButton.setDisable(false);
+            stopButton.setDisable(true);
+            pauseButton.setDisable(true);
         }
+    }
+
+    @FXML
+    private void pause(){
+        if(!service.isShutdown()) {
+            service.shutdown();
+            startButton.setDisable(false);
+            stopButton.setDisable(true);
+            pauseButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void changeStratToSeq(){
+        ((GeneratorImpl) generator).changeStrategy(sequential);
+        atomButton.setSelected(false);
+        seqButton.setSelected(true);
+    }
+
+    @FXML
+    private void changeStratToAtom(){
+        ((GeneratorImpl) generator).changeStrategy(atomic);
+        atomButton.setSelected(true);
+        seqButton.setSelected(false);
     }
 }

@@ -13,6 +13,7 @@ public class App extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
         primaryStage.setTitle("ActiveObject");
         primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setOnCloseRequest((event) -> System.exit(0));
         primaryStage.show();
     }
 
