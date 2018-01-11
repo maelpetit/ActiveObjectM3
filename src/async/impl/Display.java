@@ -32,7 +32,6 @@ public class Display  implements Observer<AsyncGenerator> {
     public void update(AsyncGenerator asyncGenerator) {
         try {
             Integer value = asyncGenerator.getValue().get();
-            System.out.println(value);
             Platform.runLater(() -> label.setText(value + ""));
         } catch (InterruptedException e) {
             e.printStackTrace();
